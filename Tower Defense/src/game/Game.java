@@ -2,11 +2,9 @@ package game;
 
 import graphics.AnimationDrawer;
 import graphics.Drawable;
-
 import java.awt.*;
 import java.io.File;
 import java.io.Serializable;
-
 import threats.Threat;
 import main.Window;
 
@@ -59,13 +57,15 @@ public class Game implements Serializable, Drawable, Runnable {
 	private Stats stats;
 	
 	// Otros compomentes
-	private int waveIDsOrder[] = { Wave.KEYLOGGER_WAVE, Wave.SPY_WAVE, Wave.WORM_WAVE, Wave.TROJAN_WAVE, Wave.BONUS_WAVE, Wave.TROJAN_WAVE, Wave.SPAM_WAVE, Wave.SPY_WAVE, Wave.WORM_WAVE, Wave.BONUS_WAVE, Wave.SPY_WAVE, Wave.WORM_WAVE, Wave.TROJAN_WAVE, Wave.KEYLOGGER_WAVE, Wave.BONUS_WAVE, Wave.KEYLOGGER_WAVE, Wave.SPY_WAVE, Wave.SPAM_WAVE, Wave.TROJAN_WAVE, Wave.BONUS_WAVE, Wave.WORM_WAVE, Wave.TROJAN_WAVE, Wave.KEYLOGGER_WAVE, Wave.SPY_WAVE, Wave.BONUS_WAVE, Wave.TROJAN_WAVE, Wave.SPAM_WAVE, Wave.WORM_WAVE, Wave.KEYLOGGER_WAVE, Wave.BONUS_WAVE, Wave.TROJAN_WAVE, Wave.WORM_WAVE, Wave.KEYLOGGER_WAVE, Wave.SPY_WAVE, Wave.BONUS_WAVE, Wave.WORM_WAVE, Wave.SPY_WAVE, Wave.SPAM_WAVE, Wave.KEYLOGGER_WAVE, Wave.BONUS_WAVE, Wave.SPAM_WAVE, Wave.TROJAN_WAVE, Wave.WORM_WAVE, Wave.SPY_WAVE, Wave.BONUS_WAVE, Wave.TROJAN_WAVE, Wave.KEYLOGGER_WAVE, Wave.WORM_WAVE, Wave.SPAM_WAVE, Wave.FINAL_WAVE};  
+	private static final int WAVE_IDS_ORDER[] = { Wave.KEYLOGGER_WAVE, Wave.SPY_WAVE, Wave.WORM_WAVE, Wave.TROJAN_WAVE, Wave.BONUS_WAVE, Wave.TROJAN_WAVE, Wave.SPAM_WAVE, Wave.SPY_WAVE, Wave.WORM_WAVE, Wave.BONUS_WAVE, Wave.SPY_WAVE, Wave.WORM_WAVE, Wave.TROJAN_WAVE, Wave.KEYLOGGER_WAVE, Wave.BONUS_WAVE, Wave.KEYLOGGER_WAVE, Wave.SPY_WAVE, Wave.SPAM_WAVE, Wave.TROJAN_WAVE, Wave.BONUS_WAVE, Wave.WORM_WAVE, Wave.TROJAN_WAVE, Wave.KEYLOGGER_WAVE, Wave.SPY_WAVE, Wave.BONUS_WAVE, Wave.TROJAN_WAVE, Wave.SPAM_WAVE, Wave.WORM_WAVE, Wave.KEYLOGGER_WAVE, Wave.BONUS_WAVE, Wave.TROJAN_WAVE, Wave.WORM_WAVE, Wave.KEYLOGGER_WAVE, Wave.SPY_WAVE, Wave.BONUS_WAVE, Wave.WORM_WAVE, Wave.SPY_WAVE, Wave.SPAM_WAVE, Wave.KEYLOGGER_WAVE, Wave.BONUS_WAVE, Wave.SPAM_WAVE, Wave.TROJAN_WAVE, Wave.WORM_WAVE, Wave.SPY_WAVE, Wave.BONUS_WAVE, Wave.TROJAN_WAVE, Wave.KEYLOGGER_WAVE, Wave.WORM_WAVE, Wave.SPAM_WAVE, Wave.FINAL_WAVE};  
 	private boolean gameOver;
 	private boolean gameWin;
 	private boolean isPaused;
+	private int gameMode;
+	
+	// Gráfico
 	private boolean showGameHasBeenSaved;
 	private boolean showGameCouldntBeSaved;
-	private int gameMode;
 	private transient AnimationDrawer victoryDrawer = new AnimationDrawer(80);
 
 	public Game(int gamemode, int selectedMap) {
@@ -184,7 +184,7 @@ public class Game implements Serializable, Drawable, Runnable {
 	}
 	
 	public void sendWave() {
-		currentWave = new Wave(waveIDsOrder[stats.getLevel()]);
+		currentWave = new Wave(WAVE_IDS_ORDER[stats.getLevel()]);
 	}
 	
 	public Wave getWave() {
@@ -216,11 +216,11 @@ public class Game implements Serializable, Drawable, Runnable {
 	}
 
 	public int getCurrentWaveID() {
-		return waveIDsOrder[Window.getInstance().getPlayPanel().getGame().getStats().getLevel()-1];
+		return WAVE_IDS_ORDER[Window.getInstance().getPlayPanel().getGame().getStats().getLevel()-1];
 	}
 	
 	public int getNextWaveID() {
-		return waveIDsOrder[Window.getInstance().getPlayPanel().getGame().getStats().getLevel()];
+		return WAVE_IDS_ORDER[Window.getInstance().getPlayPanel().getGame().getStats().getLevel()];
 	}
 
 	public int getCurrentMoneyReward() {
